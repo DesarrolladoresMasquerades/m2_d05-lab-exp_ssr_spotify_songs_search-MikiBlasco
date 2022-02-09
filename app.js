@@ -39,6 +39,17 @@ app.get('/artist-search', (req, res) => {
   .catch(err => console.log('The error while searching artists occurred: ', err));
 });
 
+app.all('/albums/:artistId', (req, res) =>{
+    const artistId = req.params.artistId
+    spotifyApi
+    .getAlbum(artistId)
+    .then((respondeFromDB) => {
+        console.log('Response is: ', respondeFromDB)
+
+    })
+
+})
+
 
   
 
