@@ -28,13 +28,19 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => res.render('index'));
 
-spotifyApi
-  .searchArtists(/*'HERE GOES THE QUERY ARTIST'*/)
+app.get('/artist-search', (req, res) => {
+    console.log(req.query.searchString.items)
+    spotifyApi
+  .searchArtists(req.query.searchString)
   .then(data => {
-    console.log('The received data from the API: ', data.body);
-    // ----> 'HERE WHAT WE WANT TO DO AFTER RECEIVING THE DATA FROM THE API'
+    console.log('The received data from the API: ', data.body)
+    let artist = data.body.artists.items
+    res.render('artist-search-results', {artist})
   })
   .catch(err => console.log('The error while searching artists occurred: ', err));
+});
+
+
   
 
 app.listen(3000, () => console.log('My Spotify project running on port 3000 🎧 🥁 🎸 🔊'));
