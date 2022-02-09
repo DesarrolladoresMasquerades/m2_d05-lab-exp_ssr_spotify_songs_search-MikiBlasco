@@ -1,12 +1,14 @@
 <div>
- 
+ <img src="" alt="">
  <h3>
      here are your results
  </h3>
  <ul>
      {{#each artist}}
      <li>{{this.name}}</li>
-     <li>{{this.images}}</li>
+     <li>
+         <img src="{{this.images.[0].url}}" alt="">
+     </li>
      {{/each}}
  </ul>
 

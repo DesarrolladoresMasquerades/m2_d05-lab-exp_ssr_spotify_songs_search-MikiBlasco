@@ -29,13 +29,12 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', (req, res) => res.render('index'));
 
 app.get('/artist-search', (req, res) => {
-    console.log(req.query.searchString.items)
     spotifyApi
   .searchArtists(req.query.searchString)
   .then(data => {
-    console.log('The received data from the API: ', data.body)
     let artist = data.body.artists.items
     res.render('artist-search-results', {artist})
+    console.log('The received data from the API: ', data.body.artists.items[0].images[0].url)
   })
   .catch(err => console.log('The error while searching artists occurred: ', err));
 });
